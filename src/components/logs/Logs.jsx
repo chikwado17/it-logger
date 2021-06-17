@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import LogsItem from './LogsItem';
 import Preloader from '../layouts/Preloader';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import  { getLogs } from './logActions';
 
 const Logs = () => {
-    const [logs, setLogs] = useState([]);
-    const [loading, setLoading] = useState(false);
 
+    const dispatch = useDispatch()
+    const logs = useSelector(state => state.logs.logs);
+    const loading = useSelector(state => state.logs.loading);
 
-    const getLogs = async () => {
-        setLoading(true);
-        const res = await axios.get('/logs');
-        setLogs(res.data);
-        setLoading(false);
-    }
-
+     
+   
     useEffect(() => {
-        getLogs();
-        //eslint-disable-next-line
+        dispatch(getLogs());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    if(loading) {
+    if(loading || logs === null) {
         return (
             <Preloader />
         )
@@ -43,4 +41,6 @@ const Logs = () => {
     )
 }
 
-export default Logs
+
+
+export default Logs;

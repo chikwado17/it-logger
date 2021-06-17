@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import TechListItem from './TechListItem';
+import axios from 'axios';
+
 
 const TechListModal = () => {
     const [techs, setTechs] = useState([]);
@@ -26,9 +27,9 @@ const TechListModal = () => {
                 <h4>Technician List</h4>
                 <ul className="collection">
                     {!loading && 
-                        techs.map(tech => (
+                        techs.map(tech => {
                             <TechListItem tech={tech} key={tech.id} />
-                        ))
+                        })
                     }
                 </ul>
             </div>
