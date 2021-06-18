@@ -9,12 +9,26 @@ const initialState = {
 const logReducers = (state = initialState, action) => {
     switch(action.type) {
 
+        case 'ADD_LOG':
+            return {
+                ...state,
+                logs: [...state.logs, action.payload],
+                loading: false
+            }
+
         case 'GET_LOGS': 
             return {
                 ...state,
                 logs: action.payload,
                 loading: false
             }
+
+        case 'DELETE_LOG':
+            return {
+                ...state,
+                logs: state.logs.filter((log) => log.id !== action.payload),
+                loading: false
+              }
 
         case "SET_LOADING":
             return {

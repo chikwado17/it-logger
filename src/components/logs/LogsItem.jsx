@@ -1,7 +1,12 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { useDispatch } from 'react-redux';
+import { deleteLog } from './logActions';
 
 const LogsItem = ({log}) => {
+
+    const dispatch = useDispatch();
+
     return (
         <li className="collection-item">
             <div>
@@ -13,7 +18,7 @@ const LogsItem = ({log}) => {
                     <span className="black-text">ID #{log.id}</span> last updated by {' '}
                     <span className="black-text">{log.tech}</span> on <Moment format='MMMM Do YYYY, hh:mm:ss a'>{log.date}</Moment>
                 </span>
-                <a href="#!" className="secondary-content">
+                <a href="#!" onClick={() => dispatch(deleteLog(log.id))} className="secondary-content">
                     <i className="material-icons red-text">delete</i>
                 </a>
             </div>
