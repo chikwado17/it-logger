@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-
-
+import { useSelector } from 'react-redux';
+import { upDateLog } from './logActions';
+import { useDispatch } from 'react-redux';
 
 const EditLogModal = () => {
 
@@ -9,10 +10,19 @@ const EditLogModal = () => {
     const [attention, setAttention] = useState(false);
     const [tech,setTech] = useState('');
 
-    const modalStyle = {
-        width: "80%",
-        height: "80%"
-    };
+    //getting  out current selected log from redux state
+    const current = useSelector(state => state.logs.current);
+    const dispatch = useDispatch();
+
+
+
+    useEffect(() => {
+        if(current) {
+            setMessage(current.message);
+            setAttention(current.attention);
+            setTech(current.tech);
+        }
+    }, [current]);
 
 
     const onSubmit = () => {
@@ -21,7 +31,16 @@ const EditLogModal = () => {
                 html: 'Please enter a message and tech'
             })
         }else {
-            console.log(message);
+
+            const updatedLog = {
+                id: current.id,
+                message,
+                attention,
+                tech,
+                date: new Date()
+            }
+
+            dispatch(upDateLog(current.id, updatedLog));
 
             //clear inputs
             setMessage('');
@@ -30,6 +49,10 @@ const EditLogModal = () => {
         }
     }
 
+    const modalStyle = {
+        width: "80%",
+        height: "80%"
+    };
 
     return (
         <div id="edit-log-modal" className="modal" style={modalStyle}>
@@ -38,9 +61,6 @@ const EditLogModal = () => {
                 <div className="row">
                     <div className="input-field">
                         <input type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)} />
-                        <label htmlFor="message" className="active">
-                            Log Message
-                        </label>
                     </div>
                 </div>
                 <div className="row">

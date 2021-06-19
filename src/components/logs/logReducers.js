@@ -23,12 +23,38 @@ const logReducers = (state = initialState, action) => {
                 loading: false
             }
 
+        case 'SEARCH_LOGS': 
+            return {
+                ...state,
+                logs: action.payload,
+                loading: false
+            }
+
         case 'DELETE_LOG':
             return {
                 ...state,
                 logs: state.logs.filter((log) => log.id !== action.payload),
                 loading: false
               }
+
+        case 'SET_CURRENT_LOG':
+            return {
+                ...state,
+                current: action.payload
+            }
+        
+        case 'CLEAR_CURRENT_LOG':
+            return {
+                ...state,
+                current: null
+            }
+
+        
+        case 'UPDATE_LOG': 
+            return {
+                ...state,
+                logs: state.logs.map(log => log.id === action.payload.id ? action.payload : log)
+            }
 
         case "SET_LOADING":
             return {

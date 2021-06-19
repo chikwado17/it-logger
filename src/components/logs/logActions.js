@@ -23,6 +23,42 @@ export const addLog = (log) => {
     }
 }
 
+
+//select current log
+export const setCurrentLog = (log) => {
+    return {
+        type: 'SET_CURRENT_LOG',
+        payload:log
+    }
+}
+
+//clear selected current log
+export const clearCurrentLog = () => {
+    return {
+        type: 'CLEAR_CURRENT_LOG'
+    }
+}
+
+//function to update selected log
+export const upDateLog = (id,update) => {
+    return async (dispatch) => {
+        try {
+            setLoading();
+
+             await axios.put(`/logs/${id}`, update);
+
+            dispatch({
+                type: 'UPDATE_LOG',
+                payload: update
+            })
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+}
+
+
 //delete log
 export const deleteLog = (id) => {
     return async (dispatch) => {
@@ -40,6 +76,7 @@ export const deleteLog = (id) => {
     }
 }
 
+//fetching all logs
 export const getLogs = () => {
     return async (dispatch) => {
         try {
@@ -60,3 +97,20 @@ export const getLogs = () => {
     }
 }
 
+//function to search for log
+export const searchLogs = (text) => {
+    return async (dispatch) => {
+        try {
+            setLoading();
+            const res = await axios.get(`/logs?q=${text}`);
+
+            dispatch({
+                type: 'SEARCH_LOGS',
+                payload: res.data
+            });
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+}

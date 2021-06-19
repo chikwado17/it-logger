@@ -1,18 +1,25 @@
 {
   "logs": [
     {
-      "message": "Changed network card in server 007",
+      "id": 1,
+      "message": "Emmanuel",
       "attention": false,
-      "tech": "Sam Smith",
-      "date": "2019-05-31T15:46:10.179Z",
-      "id": 1
+      "tech": "John Doe",
+      "date": "2021-06-19T13:01:19.774Z"
     },
     {
+      "id": 2,
       "message": "wqqqq",
-      "attention": true,
-      "tech": "Sam Smith",
-      "date": "2021-06-18T14:51:11.046Z",
-      "id": 2
+      "attention": false,
+      "tech": "John Doe",
+      "date": "2021-06-19T12:59:51.356Z"
+    },
+    {
+      "id": 3,
+      "message": "changed screen laptop123",
+      "attention": false,
+      "tech": "John Doe",
+      "date": "2021-06-19T12:59:41.054Z"
     }
   ],
   "techs": [

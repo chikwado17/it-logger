@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import { useDispatch } from 'react-redux';
-import { deleteLog } from './logActions';
+import { deleteLog, setCurrentLog } from './logActions';
 
 const LogsItem = ({log}) => {
 
@@ -10,7 +10,7 @@ const LogsItem = ({log}) => {
     return (
         <li className="collection-item">
             <div>
-                <a href="#edit-log-modal" className={` modal-trigger ${log.attention ? 'red-text' : 'blue-text'} `}>
+                <a onClick={() => dispatch(setCurrentLog(log))} href="#edit-log-modal" className={` modal-trigger ${log.attention ? 'red-text' : 'blue-text'} `}>
                     {log.message}
                 </a>
                 <br />
