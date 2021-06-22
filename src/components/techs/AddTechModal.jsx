@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
-
+import { addTechs } from './techsActions';
+import { useDispatch } from 'react-redux';
 
 
 const AddTechModal = () => {
 
-    const [firstname, setFirstname] = useState('');
-    const [lastname,setLastname] = useState('');
+
+    const [firstName, setFirstname] = useState('');
+    const [lastName, setLastname] = useState('');
+
+    const dispatch = useDispatch();
     
 
     const onSubmit = () => {
-        if(firstname === '' || lastname === ''){
+        if(firstName === '' || lastName === ''){
             M.toast({
                 html: 'Please enter the firstname and lastname'
             })
         }else {
-            console.log(firstname, ' ', lastname);
 
+            dispatch(
+                addTechs({
+                    firstName,
+                    lastName
+                }
+            ))
+            M.toast({
+                html: `${firstName} ${lastName} was added as a tech`
+            })
             //clear inputs
             setFirstname('');
             setLastname('');
@@ -30,7 +42,7 @@ const AddTechModal = () => {
                 <h4>Add Tech</h4>
                 <div className="row">
                     <div className="input-field">
-                        <input type="text" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+                        <input type="text" name="firstname" value={firstName} onChange={(e) => setFirstname(e.target.value)} />
                         <label htmlFor="message" className="active">
                            Enter firstname
                         </label>
@@ -38,7 +50,7 @@ const AddTechModal = () => {
                 </div>
                 <div className="row">
                     <div className="input-field">
-                        <input type="text" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+                        <input type="text" name="lastname" value={lastName} onChange={(e) => setLastname(e.target.value)} />
                         <label htmlFor="message" className="active">
                             Enter lastname
                         </label>

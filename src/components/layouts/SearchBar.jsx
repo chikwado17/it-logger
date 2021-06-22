@@ -5,7 +5,7 @@ import { searchLogs } from '../logs/logActions';
 const SearchBar = () => {
 
     const text = useRef('');
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     const handleOnChange = (e) => {
         dispatch(searchLogs(text.current.value))

@@ -1,32 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TechListItem from './TechListItem';
-import axios from 'axios';
+import { getTechs } from './techsActions';
 
 
 const TechListModal = () => {
-    const [techs, setTechs] = useState([]);
-    const [loading, setLoading] = useState(false);
 
+    const techs = useSelector(state => state.techs.techs);
+    const loading = useSelector(state => state.techs.loading);
+    const dispatch = useDispatch();
 
-    const getTechs = async () => {
-        setLoading(true);
-        const res = await axios.get('/techs');
-        setTechs(res.data);
-        setLoading(false);
-    }
-
+    
     useEffect(() => {
-        getTechs();
+        dispatch(getTechs());
         //eslint-disable-next-line
     }, []);
-
 
     return (
         <div id="tech-list-modal" className="modal">
             <div className="modal-content">
                 <h4>Technician List</h4>
                 <ul className="collection">
-                    {!loading && 
+                    {!loading && techs !== null &&
                         techs.map(tech => (<TechListItem tech={tech} key={tech.id} />))
                     }
                 </ul>

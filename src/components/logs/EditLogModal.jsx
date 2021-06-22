@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import TechSelectOptions from '../techs/TechSelectOptions';
 import { useSelector } from 'react-redux';
 import { upDateLog } from './logActions';
 import { useDispatch } from 'react-redux';
@@ -67,8 +68,7 @@ const EditLogModal = () => {
                     <div className="input-field">
                         <select name="tech" id="" className="browser-default" onChange={(e) => setTech(e.target.value)} value={tech}>
                             <option value="" disabled>Select Technician</option>
-                            <option value="John Doe">John Doe</option>
-                            <option value="Sam Smith">Sam Smith</option>
+                           <TechSelectOptions />
                         </select>
                     </div>
                 </div>

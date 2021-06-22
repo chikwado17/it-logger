@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
+import TechSelectOptions from '../techs/TechSelectOptions';
 import { addLog } from './logActions';
 import { useDispatch } from 'react-redux';
 
@@ -64,8 +65,7 @@ const AddLogModal = () => {
                     <div className="input-field">
                         <select name="tech" id="" className="browser-default" onChange={(e) => setTech(e.target.value)} value={tech}>
                             <option value="" disabled>Select Technician</option>
-                            <option value="John Doe">John Doe</option>
-                            <option value="Sam Smith">Sam Smith</option>
+                            <TechSelectOptions/>
                         </select>
                     </div>
                 </div>
